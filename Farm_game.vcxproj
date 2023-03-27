@@ -76,10 +76,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\SDL_Lib\SDL2_ttf-2.20.1\include;C:\SDL_Lib\SDL2_mixer-2.6.2\include;C:\SDL_Lib\SDL2_image-2.6.2\include;C:\SDL_Lib\SDL2-2.26.2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\SDL_Lib\SDL2_ttf-2.20.1\lib\x86;C:\SDL_Lib\SDL2_mixer-2.6.2\lib\x86;C:\SDL_Lib\SDL2_image-2.6.2\lib\x86;C:\SDL_Lib\SDL2-2.26.2\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_image.lib;SDL2_mixer.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,6 +135,7 @@
   <ItemGroup>
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="commonFunction.cpp" />
+    <ClCompile Include="Game_map.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OtherObject.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -139,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="commonFunction.h" />
+    <ClInclude Include="Game_map.h" />
     <ClInclude Include="OtherObject.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>

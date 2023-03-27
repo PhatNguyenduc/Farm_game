@@ -14,15 +14,7 @@ public:
 	void obj_show(string path,SDL_Renderer*grenderer);
 	void cycle_obj();
 	void setPos(const int& x, const int& y) { rect.x = x;  rect.y = y; };
-	SDL_Rect Get_Rect()
-	{
-		SDL_Rect temp;
-		temp.x = rect.x;
-		temp.y = rect.y;
-		temp.h = rect.h;
-		temp.w = rect.w;
-		return temp;
-	}
+
 private:
 	float obj_xpos;
 	float obj_ypos;

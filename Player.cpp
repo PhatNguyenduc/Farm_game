@@ -13,6 +13,8 @@ Player::Player()
 	move.up = 0;
 	move.left = 0;
 	move.down = 0;
+	map_x = 0;
+	map_y = 0;
 }
 Player::~Player()
 {
@@ -62,8 +64,8 @@ void Player::show(SDL_Renderer* grenderer) {
 	else if (move.up == 1) {
 		frame = 3;
 	}
-	rect.x = x_pos;
-	rect.y = y_pos;
+	rect.x = x_pos - map_x;
+	rect.y = y_pos - map_y;
 
 	SDL_Rect* currentclip = &frame_clip[frame];
 	SDL_Rect renderQuad = { rect.x,rect.y,frame_w,frame_h };
@@ -138,40 +140,48 @@ void Player::HandleInput(SDL_Event event, SDL_Renderer* grenderer)
 		}
 	}
 }
-void Player::Moving() {
-	//Move the dot left or right
+void Player::Moving(MAP& map_data) {
+	
 	x_pos += x_val;
 
-	//If the dot went too far to the left or right
-	if ((x_pos < 0) || (x_pos +frame_w > WIDTH))
+	
+	if ((x_pos < 0) || (x_pos + frame_w > 3200))
 	{
 		//Move back
-		x_pos -= x_val;
+	x_pos -= x_val;
 	}
 
-	//Move the dot up or down
+	
 	y_pos+= y_val;
 
-	//If the dot went too far up or down
-	if ((y_pos < 0) || (y_pos + frame_h > HEIGHT))
+	
+	if ((y_pos < 0)  || (y_pos + frame_h > 1600))
 	{
 		//Move back
 		y_pos -= y_val;
 	}
+	CenterMap_on_player(map_data);
 }
 
-SDL_Rect Player::Get_Rect()
-{
-	SDL_Rect temp;
-	temp.x = rect.x;
-	temp.y = rect.y;
-	temp.h = frame_h;
-	temp.w = frame_w;
-	return temp;
-}
+
 void Player::Stop()
 {
 	    //Move back
 		x_pos -= x_val;
 		y_pos -= y_val;
+}
+void Player::CenterMap_on_player(MAP& map_data) {
+	map_data.start_x = x_pos - (WIDTH / 2);
+	if (map_data.start_x < 0)map_data.start_x = 0;
+	else if (map_data.start_x + WIDTH >= map_data.max_x) 
+	{
+		map_data.start_x = map_data.max_x - WIDTH;
+	}
+	map_data.start_y = y_pos - (HEIGHT / 2);
+	if (map_data.start_y < 0)map_data.start_y = 0;
+	else if (map_data.start_y + HEIGHT >= map_data.max_y)
+	{
+		map_data.start_y = map_data.max_y - HEIGHT;
+	}
+	
 }

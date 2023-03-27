@@ -20,14 +20,17 @@ static SDL_Event event;
 
 //screen
 
-const int WIDTH = 1408;
-const int HEIGHT = 704;
-const int BPP = 32;
+const int WIDTH = 1280;
+const int HEIGHT = 640;
+
 
 const int COLOR_KEY_R = 167;
 const int COLOR_KEY_G = 175;
 const int COLOR_KEY_B = 180;
 
+#define TILE_SIZE 64
+#define MAX_MAP_X 50
+#define MAX_MAP_Y 50
 typedef struct Input
 {
 	int left;
@@ -35,9 +38,16 @@ typedef struct Input
 	int up;
 	int down;
 };
+typedef struct MAP {
+	int start_x;
+	int start_y;
 
-namespace SDLCommonFunction
-{
-	bool Checkcollision(const SDL_Rect& object1, const SDL_Rect& object2);
-}
+	int max_x;
+	int max_y;
+
+	int tile[MAX_MAP_Y][MAX_MAP_X];
+	char* file_name;
+
+};
+
 #endif

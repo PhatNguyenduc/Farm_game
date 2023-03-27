@@ -1,7 +1,8 @@
-#include"commonFunction.h"
+﻿#include"commonFunction.h"
 #include"BaseObject.h"
 #include"Player.h"
 #include"OtherObject.h"
+#include"Game_map.h"
 BaseObject background;
 Player player;
 Object fountain;
@@ -54,7 +55,8 @@ bool init() {
 bool Load_BackGround()
 {	
 	bool res = background.Load_Img("Image_game//background2.png", grenderer);
-	if (res == false) {
+	if (res == false) 
+	{
 		return false;
 	}
 	return true;
@@ -76,25 +78,24 @@ void close()
 }
 bool checkcollision(const SDL_Rect& a, const SDL_Rect& b)
 {
-	//The sides of the rectangles
+	
 	int leftA, leftB;
 	int rightA, rightB;
 	int topA, topB;
 	int bottomA, bottomB;
 
-	//Calculate the sides of rect A
+	
 	leftA = a.x;
 	rightA = a.x + a.w / 7;
 	topA = a.y;
 	bottomA = a.y + a.h;
 
-	//Calculate the sides of rect B
+	
 	leftB = b.x;
 	rightB = b.x + b.w / 7;
 	topB = b.y;
 	bottomB = b.y + b.h;
-	//Here is where the collision detection happens.This code calculates the top / bottom and left / right of each of the collison boxes.
-		//If any of the sides from A are outside of B
+	
 	if (bottomA <= topB)
 	{
 		return false;
@@ -135,6 +136,13 @@ int main(int argc, char* argv[])
 	Uint32 frame_start ;
 	int frame_time ;
 	bool is_quit = false;
+
+	GameMap gamemap;
+	char name[14] = "map/map_1.txt";
+	gamemap.LoadMap(name);
+	gamemap.LoadTiles(grenderer);
+
+
 	while (!is_quit) 
 	{
 		frame_start = SDL_GetTicks();
@@ -147,14 +155,22 @@ int main(int argc, char* argv[])
 			
 
 		}
-		player.Moving();
-
+		MAP map_data = gamemap.getMap();
+		
+		player.Moving(map_data);
 		SDL_SetRenderDrawColor(grenderer, 255, 255, 255, 255);
 		SDL_RenderClear(grenderer);
-
-		background.Render(grenderer, NULL);
+		
+		//background.Render(grenderer, NULL);
+		
+		
+		player.SetMapXY(map_data.start_x, map_data.start_y);
+		gamemap.setMap(map_data);
+		gamemap.Draw_Map(grenderer);
+		
 		player.show(grenderer);
-		fountain.obj_show("Image_game//fountain2.png", grenderer);
+		
+		/*fountain.obj_show("Image_game//fountain2.png", grenderer);
 		fountain.cycle_obj();
 		water.obj_show("Image_game//waterfall.png",grenderer);
 		water.cycle_obj();
@@ -176,17 +192,17 @@ int main(int argc, char* argv[])
 		{
 			player.Stop();
 		}
-		if (checkcollision(player.GetRect(), tree.Get_Rect()))
-		{
-			player.Stop();
-		}
-		water.Free();
+		
+		
+		*///water.Free();
 		player.Free();
-		fountain.Free();
-		tree.Free();
-		Chicken.Free();
-
-
+		//fountain.Free();
+		//tree.Free();
+		//Chicken.Free();
+		
+		
+		
+		
 		SDL_RenderPresent(grenderer);
 
 		frame_time = SDL_GetTicks() - frame_start;

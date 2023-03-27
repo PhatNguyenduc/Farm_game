@@ -11,9 +11,9 @@ class BaseObject
 public:
 	BaseObject();
 	~BaseObject();
-	void Set_Rect(const int& x, const int& y) {
-		rect.x = x;
-		rect.y = y;
+	void Set_Rect(const int& X, const int& Y) {
+		rect.x = X;
+		rect.y = Y;
 
 	}
 	SDL_Rect GetRect() const {
