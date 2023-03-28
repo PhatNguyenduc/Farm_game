@@ -15,6 +15,7 @@ Player::Player()
 	move.down = 0;
 	map_x = 0;
 	map_y = 0;
+	status=0;
 }
 Player::~Player()
 {
@@ -25,7 +26,7 @@ bool Player::LoadImg(string path, SDL_Renderer* grenderer)
 {
 	bool res = BaseObject::Load_Img(path, grenderer);
 	if (res) {
-		frame_w = rect.w / 4;
+		frame_w = rect.w / 8;
 		frame_h = rect.h;
 	}
 	return res;
@@ -34,7 +35,7 @@ void Player::set_clip()
 {
 	if (frame_w > 0 && frame_h > 0)
 	{
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			frame_clip[i].x = i * frame_w;
 			frame_clip[i].y = 0;
@@ -46,28 +47,49 @@ void Player::set_clip()
 }
 
 void Player::show(SDL_Renderer* grenderer) {
-	LoadImg("Image_game//player.png", grenderer);
-	/*if (move.left == 1 || move.right == 1 || move.down == 1 || move.up == 1) {
+	if (status == DOWN)
+	{
+		LoadImg("Image_game/DOWN.png", grenderer);
+		
+	}
+	else if (status == UP)
+	{
+		LoadImg("Image_game/UP.png", grenderer);
+	}
+	else if (status == RIGHT)
+	{
+		LoadImg("Image_game/RIGHT.png", grenderer);
+	}
+	else if (status == LEFT)
+	{
+		LoadImg("Image_game/LEFT.png", grenderer);
+	}
+	
+	
+	/*if (move.down == 1) {
 		frame++;
+
 	}
-	else {frame = 0;}
-	if (frame >= 4) { frame = 0; }*/
-	if (move.down == 1) {
-		frame = 0;
+	else frame = 0;
+	if (move.left == 1) {
+		
+		
 	}
-	else if (move.left == 1) {
-		frame = 1;
+	else frame = 0;
+	 if (move.right == 1) {
+		
+		
 	}
-	else if (move.right == 1) {
-		frame = 2;
+	else frame = 0;
+	if (move.up == 1) {
+		
+		
 	}
-	else if (move.up == 1) {
-		frame = 3;
-	}
+	else frame = 0;*/
 	rect.x = x_pos - map_x;
 	rect.y = y_pos - map_y;
 
-	SDL_Rect* currentclip = &frame_clip[frame];
+	SDL_Rect* currentclip = &frame_clip[frame/10];
 	SDL_Rect renderQuad = { rect.x,rect.y,frame_w,frame_h };
 	SDL_RenderCopy(grenderer, p_object, currentclip, &renderQuad);
 }
@@ -79,6 +101,7 @@ void Player::HandleInput(SDL_Event event, SDL_Renderer* grenderer)
 		{
 		case SDLK_a:
 		{
+			status = LEFT;
 			move.left = 1;
 			move.right = 0;
 			move.up = 0;
@@ -88,6 +111,7 @@ void Player::HandleInput(SDL_Event event, SDL_Renderer* grenderer)
 		}
 		case SDLK_d:
 		{
+			status = RIGHT;
 			move.left = 0;
 			move.right = 1;
 			move.up = 0;
@@ -97,6 +121,7 @@ void Player::HandleInput(SDL_Event event, SDL_Renderer* grenderer)
 		}
 		case SDLK_w:
 		{
+			status = UP;
 			move.up = 1;
 			move.down = 0;
 			move.left = 0;
@@ -106,6 +131,7 @@ void Player::HandleInput(SDL_Event event, SDL_Renderer* grenderer)
 		}
 		case SDLK_s:
 		{
+			status = DOWN;
 			move.down = 1;
 			move.up = 0;
 			move.left = 0;
@@ -183,5 +209,10 @@ void Player::CenterMap_on_player(MAP& map_data) {
 	{
 		map_data.start_y = map_data.max_y - HEIGHT;
 	}
+	
+}
+void Player::cycle_player() {
+	++frame;
+	if (frame / 8 > 8)frame = 0;
 	
 }

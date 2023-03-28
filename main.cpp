@@ -52,15 +52,15 @@ bool init() {
 }
 
 
-bool Load_BackGround()
-{	
-	bool res = background.Load_Img("Image_game//background2.png", grenderer);
-	if (res == false) 
-	{
-		return false;
-	}
-	return true;
-}
+//bool Load_BackGround()
+//{	
+//	bool res = background.Load_Img("Image_game//background2.png", grenderer);
+//	if (res == false) 
+//	{
+//		return false;
+//	}
+//	return true;
+//}
 
 
 void close()
@@ -125,24 +125,24 @@ int main(int argc, char* argv[])
 	{
 		return -1;
 	}
-	if (Load_BackGround() == false)
+	/*if (Load_BackGround() == false)
 	{
 		return -1;
-	}
+	}*/
 	
-	player.LoadImg("Image_game//player.png", grenderer);
-	player.set_clip();
+	//player.LoadImg("Image_game//DOWN.png", grenderer);
+	
 	
 	Uint32 frame_start ;
 	int frame_time ;
 	bool is_quit = false;
 
 	GameMap gamemap;
-	char name[14] = "map/map_1.txt";
+	char name[14] = "map/map.txt";
 	gamemap.LoadMap(name);
 	gamemap.LoadTiles(grenderer);
-
-
+	
+	
 	while (!is_quit) 
 	{
 		frame_start = SDL_GetTicks();
@@ -153,10 +153,10 @@ int main(int argc, char* argv[])
 			}
 			player.HandleInput(event, grenderer);
 			
-
 		}
-		MAP map_data = gamemap.getMap();
 		
+		MAP map_data = gamemap.getMap();
+	
 		player.Moving(map_data);
 		SDL_SetRenderDrawColor(grenderer, 255, 255, 255, 255);
 		SDL_RenderClear(grenderer);
@@ -165,10 +165,13 @@ int main(int argc, char* argv[])
 		
 		
 		player.SetMapXY(map_data.start_x, map_data.start_y);
-		gamemap.setMap(map_data);
+		
 		gamemap.Draw_Map(grenderer);
+		gamemap.setMap(map_data);
 		
 		player.show(grenderer);
+		player.set_clip();
+		player.cycle_player();
 		
 		/*fountain.obj_show("Image_game//fountain2.png", grenderer);
 		fountain.cycle_obj();

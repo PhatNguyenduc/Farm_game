@@ -20,8 +20,8 @@ static SDL_Event event;
 
 //screen
 
-const int WIDTH = 1280;
-const int HEIGHT = 640;
+const float WIDTH = 1280;
+const float HEIGHT = 640;
 
 
 const int COLOR_KEY_R = 167;
@@ -30,7 +30,7 @@ const int COLOR_KEY_B = 180;
 
 #define TILE_SIZE 64
 #define MAX_MAP_X 50
-#define MAX_MAP_Y 50
+#define MAX_MAP_Y 35
 typedef struct Input
 {
 	int left;
