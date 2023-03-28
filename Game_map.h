@@ -27,6 +27,7 @@ public:
 	void setMap(MAP& map_data) {
 		game_map = map_data;
 	};
+
 private:
 	MAP game_map;
 	TileMap tile_map[MAX_TILE];

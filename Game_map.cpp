@@ -41,7 +41,7 @@ void GameMap::LoadTiles(SDL_Renderer* grenderer)
 {
 	char file_img[100];
 	FILE* fp = NULL;
-	for (int i = 1; i < 5; i++) {
+	for (int i = 1; i < 50; i++) {
 		sprintf_s(file_img, "map/%d.png", i);
 		fopen_s(&fp, file_img, "rb");
 		if (fp == NULL)

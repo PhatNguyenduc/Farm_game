@@ -52,15 +52,15 @@ bool init() {
 }
 
 
-bool Load_BackGround()
-{	
-	bool res = background.Load_Img("Image_game//background2.png", grenderer);
-	if (res == false) 
-	{
-		return false;
-	}
-	return true;
-}
+//bool Load_BackGround()
+//{	
+//	bool res = background.Load_Img("Image_game//background2.png", grenderer);
+//	if (res == false) 
+//	{
+//		return false;
+//	}
+//	return true;
+//}
 
 
 void close()
@@ -76,73 +76,31 @@ void close()
 	SDL_Quit();
 
 }
-bool checkcollision(const SDL_Rect& a, const SDL_Rect& b)
-{
-	
-	int leftA, leftB;
-	int rightA, rightB;
-	int topA, topB;
-	int bottomA, bottomB;
 
-	
-	leftA = a.x;
-	rightA = a.x + a.w / 7;
-	topA = a.y;
-	bottomA = a.y + a.h;
-
-	
-	leftB = b.x;
-	rightB = b.x + b.w / 7;
-	topB = b.y;
-	bottomB = b.y + b.h;
-	
-	if (bottomA <= topB)
-	{
-		return false;
-	}
-
-	if (topA >= bottomB)
-	{
-		return false;
-	}
-
-	if (rightA <= leftB)
-	{
-		return false;
-	}
-
-	if (leftA >= rightB)
-	{
-		return false;
-	}
-
-	//If none of the sides from A are outside B
-	return true;
-}
 int main(int argc, char* argv[])
 {	
 	if (init() == false)
 	{
 		return -1;
 	}
-	if (Load_BackGround() == false)
+	/*if (Load_BackGround() == false)
 	{
 		return -1;
-	}
+	}*/
 	
-	player.LoadImg("Image_game//player.png", grenderer);
-	player.set_clip();
+	//player.LoadImg("Image_game//DOWN.png", grenderer);
+	
 	
 	Uint32 frame_start ;
 	int frame_time ;
 	bool is_quit = false;
 
 	GameMap gamemap;
-	char name[14] = "map/map_1.txt";
+	char name[14] = "map/map.txt";
 	gamemap.LoadMap(name);
 	gamemap.LoadTiles(grenderer);
-
-
+	
+	
 	while (!is_quit) 
 	{
 		frame_start = SDL_GetTicks();
@@ -153,10 +111,10 @@ int main(int argc, char* argv[])
 			}
 			player.HandleInput(event, grenderer);
 			
-
 		}
-		MAP map_data = gamemap.getMap();
 		
+		MAP map_data = gamemap.getMap();
+	
 		player.Moving(map_data);
 		SDL_SetRenderDrawColor(grenderer, 255, 255, 255, 255);
 		SDL_RenderClear(grenderer);
@@ -165,40 +123,44 @@ int main(int argc, char* argv[])
 		
 		
 		player.SetMapXY(map_data.start_x, map_data.start_y);
-		gamemap.setMap(map_data);
-		gamemap.Draw_Map(grenderer);
 		
+		gamemap.Draw_Map(grenderer);
+		gamemap.setMap(map_data);
+	
 		player.show(grenderer);
+		
+		player.set_clip();
+		player.cycle_player();
 		
 		/*fountain.obj_show("Image_game//fountain2.png", grenderer);
 		fountain.cycle_obj();
 		water.obj_show("Image_game//waterfall.png",grenderer);
 		water.cycle_obj();
-		tree.Load_Img("Image_game//Tree.png", grenderer);
-		Chicken.obj_show("Image_game//chicken.png", grenderer);	
-		tree.Render(grenderer,NULL);
+		tree.Load_Img("Image_game//Tree.png", grenderer);*/
+		Chicken.obj_show("Image_game/chicken.png", grenderer);	
+		/*tree.Render(grenderer,NULL);*/
 		Chicken.cycle_obj();
-		
+		/*
 		fountain.setPos(WIDTH/4*3,HEIGHT/4*3);
 		water.setPos(WIDTH/2,0);
-		tree.setPos(400,400);
-		Chicken.setPos(WIDTH / 3, HEIGHT / 2);
+		tree.setPos(400,400);*/
+		Chicken.setPos(0,0);
 
-		if (checkcollision(player.GetRect(), fountain.GetRect()))
-		{
-			player.Stop();
-		}
-		if (checkcollision(player.GetRect(), water.GetRect()))
-		{
-			player.Stop();
-		}
+		//if (checkcollision(player.GetRect(), fountain.GetRect()))
+		//{
+		//	player.Stop();
+		//}
+		//if (checkcollision(player.GetRect(), water.GetRect()))
+		//{
+		//	player.Stop();
+		//}
 		
 		
-		*///water.Free();
+		///water.Free();
 		player.Free();
 		//fountain.Free();
 		//tree.Free();
-		//Chicken.Free();
+		Chicken.Free();
 		
 		
 		
