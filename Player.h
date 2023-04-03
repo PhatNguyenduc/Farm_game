@@ -4,7 +4,11 @@
 #define PLAYER_H
 #include "commonFunction.h"
 #include "BaseObject.h"
+
 #define SPEED 6
+
+#define SPEED 10
+
 class Player : public BaseObject {
 public:
 	Player();

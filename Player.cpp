@@ -212,6 +212,7 @@ void Player::CenterMap_on_player(MAP& map_data) {
 	}
 	
 }
+
 void Player::collision(MAP& map_data)
 {
 	int x1;
@@ -298,9 +299,15 @@ void Player::collision(MAP& map_data)
 		}
 	}
 }
+
+
 void Player::cycle_player() {
 	++frame;
 	if (frame / 8 > 8)frame = 0;
 	
+
 }
+
+
+
 

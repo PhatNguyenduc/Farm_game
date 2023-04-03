@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animal.cpp" />
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="commonFunction.cpp" />
     <ClCompile Include="Game_map.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animal.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="commonFunction.h" />
     <ClInclude Include="Game_map.h" />

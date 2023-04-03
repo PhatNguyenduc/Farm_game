@@ -3,6 +3,8 @@
 #include"Player.h"
 #include"OtherObject.h"
 #include"Game_map.h"
+#include"Animal.h"
+#include <vector>
 BaseObject background;
 Player player;
 Object fountain;
@@ -77,6 +79,26 @@ void close()
 
 }
 
+vector<Animal*>animal()
+{
+	vector<Animal*>list_animal;
+	Animal* animal = new Animal[5];
+	for (int i = 0; i < 5; i++)
+	{
+		Animal* p_animal = (animal + i);
+		if (p_animal != NULL)
+		{
+			p_animal->LoadImg("Image_game/catto.png", grenderer);
+			p_animal->set_clip();
+			p_animal->set_x_pos(i*200+400);
+			p_animal->set_y_pos(300);
+
+			list_animal.push_back(p_animal);
+
+		}
+	}
+	return list_animal;
+}
 int main(int argc, char* argv[])
 {	
 	if (init() == false)
@@ -100,7 +122,7 @@ int main(int argc, char* argv[])
 	gamemap.LoadMap(name);
 	gamemap.LoadTiles(grenderer);
 	
-	
+	vector<Animal*>ANIMAL = animal();
 	while (!is_quit) 
 	{
 		frame_start = SDL_GetTicks();
@@ -123,11 +145,18 @@ int main(int argc, char* argv[])
 		
 		
 		player.SetMapXY(map_data.start_x, map_data.start_y);
+
+
+		gamemap.Draw_Map(grenderer);
+		gamemap.setMap(map_data);
+
 		
 		gamemap.Draw_Map(grenderer);
 		gamemap.setMap(map_data);
 	
 		player.show(grenderer);
+		player.set_clip();
+		player.cycle_player();
 		
 		player.set_clip();
 		player.cycle_player();
@@ -162,6 +191,16 @@ int main(int argc, char* argv[])
 		//tree.Free();
 		Chicken.Free();
 		
+		for (int i = 0; i < ANIMAL.size(); i++)
+		{
+			Animal* p_animal = ANIMAL.at(i);
+			if (p_animal != NULL)
+			{
+				p_animal->set_MapXY(map_data.start_x, map_data.start_y);
+				p_animal->doPlayer(map_data);
+				p_animal->Show(grenderer);
+			}
+		}
 		
 		
 		
