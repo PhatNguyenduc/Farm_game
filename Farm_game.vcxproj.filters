@@ -27,13 +27,13 @@
     <ClCompile Include="commonFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OtherObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game_map.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Animal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImpTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,13 +47,13 @@
     <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OtherObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game_map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Animal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImpTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

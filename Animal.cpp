@@ -9,11 +9,14 @@ Animal::Animal()
 	x_pos = 0;
 	y_pos = 0;
 	frame = 0;
-
+	animation_a = 0;
+	animation_b = 0;
+	input_type.left = 1;
+	type_move = STAND_;
 }
 Animal::~Animal()
 {
-
+	Free();
 }
 
 bool Animal::LoadImg(string path, SDL_Renderer * grenderer)
@@ -40,9 +43,28 @@ void Animal::Show(SDL_Renderer* grenderer)
 
 void Animal::doPlayer(MAP& map_data)
 {
-	x_val = 0;
-	y_val = 0;
+	/*x_val = 0;
+	y_val = 0;*/
+	if (input_type.left == 1)
+	{
+		x_val -= 1;
+	}
+	else if (input_type.right == 1) {
+		x_val += 1;
+	}
 	ChecktoMap(map_data);
+	if (x_pos>1000 )
+	{
+		x_val-=1;
+		animation_a -= 1000;
+		animation_b -= 1000;
+	}
+	else
+	{
+		x_pos = 0;
+	}
+	y_pos = 400;
+	input_type.left = 1;
 }
 
 void Animal::ChecktoMap(MAP& map_data)
@@ -146,3 +168,26 @@ void Animal::set_clip()
 	}
 }
 
+void Animal::ImpMoveType(SDL_Renderer* grenderer)
+{
+	if (type_move == STAND_)
+	{
+		;
+	}
+	else
+	{
+		if (x_pos > animation_b)
+		{
+			input_type.left = 1;
+			input_type.right = 0;
+			LoadImg("Image_game/threat_left.png", grenderer);
+		 }
+		else if (x_pos < animation_a)
+		{
+			input_type.left = 0;
+			input_type.right = 1;
+			LoadImg("Image_game/threat_right.png", grenderer);
+		}
+
+	}
+}

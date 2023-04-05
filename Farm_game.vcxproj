@@ -137,8 +137,8 @@
     <ClCompile Include="BaseObject.cpp" />
     <ClCompile Include="commonFunction.cpp" />
     <ClCompile Include="Game_map.cpp" />
+    <ClCompile Include="ImpTimer.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="OtherObject.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,7 +146,7 @@
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="commonFunction.h" />
     <ClInclude Include="Game_map.h" />
-    <ClInclude Include="OtherObject.h" />
+    <ClInclude Include="ImpTimer.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

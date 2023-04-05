@@ -22,7 +22,7 @@ static SDL_Event event;
 
 const float WIDTH = 1280;
 const float HEIGHT = 640;
-
+const int FPS = 60;
 
 const int COLOR_KEY_R = 167;
 const int COLOR_KEY_G = 175;

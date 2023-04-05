@@ -5,14 +5,11 @@
 #include"Game_map.h"
 #include"Animal.h"
 #include <vector>
+#include"ImpTimer.h"
 BaseObject background;
 Player player;
-Object fountain;
-Object water;
-Object tree;
-Object Chicken;
-const int FPS = 60;
-const int frame_Delay = 1000 / FPS;
+
+
 
 bool init() {
 	bool success = true;
@@ -54,17 +51,6 @@ bool init() {
 }
 
 
-//bool Load_BackGround()
-//{	
-//	bool res = background.Load_Img("Image_game//background2.png", grenderer);
-//	if (res == false) 
-//	{
-//		return false;
-//	}
-//	return true;
-//}
-
-
 void close()
 {
 	
@@ -82,6 +68,26 @@ void close()
 vector<Animal*>animal()
 {
 	vector<Animal*>list_animal;
+
+	Animal* dynamic_animal = new Animal[5];
+	for (int i = 0; i < 5; i++) {
+		Animal* p_animal = (dynamic_animal + i);
+		if (p_animal != NULL)
+		{
+			p_animal->LoadImg("Image_game/threat_left.png", grenderer);
+			p_animal->set_x_pos(i * 300 + 300);
+			p_animal->set_y_pos(400);
+			p_animal->set_clip();
+			p_animal->set_type_move(Animal::MOVE_);
+			int left = p_animal->get_x_pos() - 128;
+			int right = p_animal->get_x_pos() + 128;
+			p_animal->Set_Area(left, right);
+			list_animal.push_back(p_animal); 
+		}
+	}
+
+
+
 	Animal* animal = new Animal[5];
 	for (int i = 0; i < 5; i++)
 	{
@@ -92,7 +98,8 @@ vector<Animal*>animal()
 			p_animal->set_clip();
 			p_animal->set_x_pos(i*200+400);
 			p_animal->set_y_pos(300);
-
+			p_animal->set_type_move(Animal::STAND_);
+			p_animal->set_input_left(0);
 			list_animal.push_back(p_animal);
 
 		}
@@ -101,20 +108,14 @@ vector<Animal*>animal()
 }
 int main(int argc, char* argv[])
 {	
+
+	ImpTimer fps_timer;
 	if (init() == false)
 	{
 		return -1;
 	}
-	/*if (Load_BackGround() == false)
-	{
-		return -1;
-	}*/
-	
-	//player.LoadImg("Image_game//DOWN.png", grenderer);
 	
 	
-	Uint32 frame_start ;
-	int frame_time ;
 	bool is_quit = false;
 
 	GameMap gamemap;
@@ -125,7 +126,7 @@ int main(int argc, char* argv[])
 	vector<Animal*>ANIMAL = animal();
 	while (!is_quit) 
 	{
-		frame_start = SDL_GetTicks();
+		fps_timer.start();
 		while (SDL_PollEvent(&event) != 0) {
 			if (event.type == SDL_QUIT)
 			{
@@ -141,7 +142,7 @@ int main(int argc, char* argv[])
 		SDL_SetRenderDrawColor(grenderer, 255, 255, 255, 255);
 		SDL_RenderClear(grenderer);
 		
-		//background.Render(grenderer, NULL);
+		
 		
 		
 		player.SetMapXY(map_data.start_x, map_data.start_y);
@@ -153,6 +154,7 @@ int main(int argc, char* argv[])
 		
 		gamemap.Draw_Map(grenderer);
 		gamemap.setMap(map_data);
+
 	
 		player.show(grenderer);
 		player.set_clip();
@@ -161,53 +163,32 @@ int main(int argc, char* argv[])
 		player.set_clip();
 		player.cycle_player();
 		
-		/*fountain.obj_show("Image_game//fountain2.png", grenderer);
-		fountain.cycle_obj();
-		water.obj_show("Image_game//waterfall.png",grenderer);
-		water.cycle_obj();
-		tree.Load_Img("Image_game//Tree.png", grenderer);*/
-		Chicken.obj_show("Image_game/chicken.png", grenderer);	
-		/*tree.Render(grenderer,NULL);*/
-		Chicken.cycle_obj();
-		/*
-		fountain.setPos(WIDTH/4*3,HEIGHT/4*3);
-		water.setPos(WIDTH/2,0);
-		tree.setPos(400,400);*/
-		Chicken.setPos(0,0);
-
-		//if (checkcollision(player.GetRect(), fountain.GetRect()))
-		//{
-		//	player.Stop();
-		//}
-		//if (checkcollision(player.GetRect(), water.GetRect()))
-		//{
-		//	player.Stop();
-		//}
-		
-		
-		///water.Free();
 		player.Free();
-		//fountain.Free();
-		//tree.Free();
-		Chicken.Free();
-		
+
 		for (int i = 0; i < ANIMAL.size(); i++)
 		{
 			Animal* p_animal = ANIMAL.at(i);
 			if (p_animal != NULL)
 			{
 				p_animal->set_MapXY(map_data.start_x, map_data.start_y);
+				p_animal->ImpMoveType(grenderer);
 				p_animal->doPlayer(map_data);
 				p_animal->Show(grenderer);
+				//p_animal->Free();
 			}
 		}
 		
 		
 		
 		SDL_RenderPresent(grenderer);
+		int real_imp_time = fps_timer.get_ticks();
+		int time_one_frame = 1000 / FPS;
 
-		frame_time = SDL_GetTicks() - frame_start;
-		if (frame_Delay > frame_time) { SDL_Delay(frame_Delay - frame_time); }
+		if (real_imp_time < time_one_frame)
+		{
+			SDL_Delay(time_one_frame - real_imp_time);
+		}
+
 		
 	}
 	close();

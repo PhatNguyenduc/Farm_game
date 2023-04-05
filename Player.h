@@ -7,7 +7,7 @@
 
 #define SPEED 6
 
-#define SPEED 10
+
 
 class Player : public BaseObject {
 public:
