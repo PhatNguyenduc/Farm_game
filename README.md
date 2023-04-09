@@ -18,6 +18,13 @@ game Funny_Farm được viết bằng ngôn ngữ C++ và sử dụng thư vi�
 
 
 ->quá thời gian bạn sẽ thua
+
+
+
+
+
+
+
 ![lose](https://user-images.githubusercontent.com/115773745/230782240-479deb17-f6d1-413c-bc67-3ba74f5985db.png)
 
 
