@@ -10,6 +10,7 @@
 #include<SDL_mixer.h>
 #include<SDL_ttf.h>
 #include <string>
+#include<cmath>
 #include<Windows.h>
 using namespace std;
 
@@ -28,9 +29,9 @@ const int COLOR_KEY_R = 167;
 const int COLOR_KEY_G = 175;
 const int COLOR_KEY_B = 180;
 
-#define TILE_SIZE 64
-#define MAX_MAP_X 50
-#define MAX_MAP_Y 35
+const int TILE_SIZE = 64;
+const int  MAX_MAP_X = 50;
+const int MAX_MAP_Y = 35;
 typedef struct Input
 {
 	int left;
@@ -39,11 +40,11 @@ typedef struct Input
 	int down;
 };
 typedef struct MAP {
-	int start_x;
-	int start_y;
+	int start_x	 ;
+	int start_y	 ;
 
-	int max_x;
-	int max_y;
+	int max_x  ;
+	int max_y  ;
 
 	int tile[MAX_MAP_Y][MAX_MAP_X];
 	char* file_name;

@@ -135,11 +135,11 @@
   <ItemGroup>
     <ClCompile Include="Animal.cpp" />
     <ClCompile Include="BaseObject.cpp" />
-    <ClCompile Include="commonFunction.cpp" />
     <ClCompile Include="Game_map.cpp" />
     <ClCompile Include="ImpTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Text.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animal.h" />
@@ -148,6 +148,7 @@
     <ClInclude Include="Game_map.h" />
     <ClInclude Include="ImpTimer.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Text.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

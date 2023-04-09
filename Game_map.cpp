@@ -41,8 +41,8 @@ void GameMap::LoadTiles(SDL_Renderer* grenderer)
 {
 	char file_img[100];
 	FILE* fp = NULL;
-	for (int i = 1; i < 50; i++) {
-		sprintf_s(file_img, "map/%d.png", i);
+	for (int i = 1; i <= 90; i++) {
+		sprintf_s(file_img, "Map_/%d.png", i);
 		fopen_s(&fp, file_img, "rb");
 		if (fp == NULL)
 		{
@@ -68,8 +68,8 @@ void GameMap::Draw_Map(SDL_Renderer* grenderer)
 
 	map_x = game_map.start_x / TILE_SIZE;
 	map_y = game_map.start_y / TILE_SIZE;
-	x1 = (game_map.start_x % TILE_SIZE) * -1;
-	x2 = x1 + WIDTH + (x1 == 0 ? 0 : TILE_SIZE);
+	x1 = (game_map.start_x % TILE_SIZE ) * -1;
+	x2 = x1 + WIDTH + (x1 == 0 ? 0 : TILE_SIZE );
 
 	y1 = (game_map.start_y % TILE_SIZE) * -1;
 	y2 = x1 + HEIGHT + (y1 == 0 ? 0 : TILE_SIZE);

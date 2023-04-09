@@ -9,11 +9,6 @@ class Animal :public BaseObject
 public:
 	Animal();
 	~Animal();
-	enum TypeMove
-	{
-		STAND_ = 0,
-		MOVE_ = 1,
-	};
 	void set_x_val(const float& xval) { x_val = xval; }
 	void set_y_val(const float& yval) { y_val = yval; }
 	void set_x_pos(const float& xpos) { x_pos = xpos; }
@@ -22,34 +17,40 @@ public:
 	float get_x_pos()const { return x_pos; }
 	float get_y_pos()const { return y_pos; }
 	void set_clip();
+	void follow(const int& x, const int& y, MAP& map_data);
+	void move_pet(MAP& map_data);
+	
 	bool LoadImg(string path,SDL_Renderer* grenderer);
 	void Show(SDL_Renderer* grenderer);
 	int get_width_frame() { return width_frame; }
 	int get_height_frame() { return height_frame; }
-	void doPlayer(MAP& map_data);
+	void move_ani(MAP& map_data);
 	void ChecktoMap(MAP& map_data);
-	void set_type_move(const int& typemove) { type_move = typemove; }
-	void Set_Area(const int & pos_a,const int & pos_b)
+	
+	void Set_Area(const int & pos_a,const int & pos_b,const int& pos_c,const int &pos_d)
 	{
-		animation_a = pos_a, animation_b = pos_b;
+			Lim_Left = pos_a, Lim_Right = pos_b,
+			Lim_Up = pos_c, Lim_Down = pos_d;
 	}
 	void set_input_left(const int& ipLeft) { input_type.left = ipLeft; }
-	void ImpMoveType(SDL_Renderer* grenderer);
+	
 private:
 	float x_pos;
 	float y_pos;
 	float x_val;
 	float y_val;
+	int Lim_Left;
+	int Lim_Right;
+	int Lim_Up;
+	int Lim_Down;
 	int map_x;
 	int map_y;
 	SDL_Rect frame_clip[8];
 	int width_frame;
 	int height_frame;
 	int frame;
+	SDL_RendererFlip flip;
 	
-	int type_move;
-	int animation_a;
-	int animation_b;
 	Input input_type;
 	
 };

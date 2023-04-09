@@ -5,7 +5,7 @@
 #include"commonFunction.h"
 #include"BaseObject.h"
 
-#define MAX_TILE 100
+constexpr auto MAX_TILE = 120;
 class TileMap : public BaseObject
 {
 public:

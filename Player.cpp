@@ -66,26 +66,6 @@ void Player::show(SDL_Renderer* grenderer) {
 	}
 	
 	
-	/*if (move.down == 1) {
-		frame++;
-
-	}
-	else frame = 0;
-	if (move.left == 1) {
-		
-		
-	}
-	else frame = 0;
-	 if (move.right == 1) {
-		
-		
-	}
-	else frame = 0;
-	if (move.up == 1) {
-		
-		
-	}
-	else frame = 0;*/
 	rect.x = x_pos - map_x;
 	rect.y = y_pos - map_y;
 
@@ -222,43 +202,111 @@ void Player::collision(MAP& map_data)
 	
 	
 	x1 = (x_pos + x_val) / TILE_SIZE;
-	x2 = (x_pos + x_val + frame_w - 1) / TILE_SIZE;
+	x2 = (x_pos + x_val + frame_w -15) / TILE_SIZE;
 
 	y1 = (y_pos + y_val) / TILE_SIZE;
-	y2 = (y_pos + y_val + frame_h - 1) / TILE_SIZE;
+	y2 = (y_pos + y_val + frame_h -15) / TILE_SIZE;
 	if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
 	{
 		if (x_val > 0)
 		{
-			if (
-				   map_data.tile[y1][x2] == 1
-				|| map_data.tile[y1][x2] == 24
-				|| map_data.tile[y1][x2] == 25
-				|| map_data.tile[y1][x2] == 3
-				
-				|| map_data.tile[y2][x2] == 1
-				|| map_data.tile[y2][x2] == 24
-				|| map_data.tile[y2][x2] == 25
-				|| map_data.tile[y2][x2] == 3
-				)
-			{
-				x_pos -= x_val;
+			    int val1 = map_data.tile[y1][x2];
+			    int val2 = map_data.tile[y2][x2];
+			if (val1 == APPLE || val2 == APPLE) {
+				map_data.tile[y1][x2] = EMPTY_APPLE;
+				map_data.tile[y2][x2] = EMPTY_APPLE;
+				increase_apple();
 			}
+			else if (val1 == EGG || val2 == EGG) {
+				map_data.tile[y1][x2] = EMPTY_EGG;
+				map_data.tile[y2][x2] = EMPTY_EGG;
+				increase_egg();
+			}
+			else if (val1 == CARROT || val2 == CARROT) {
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_carrot();
+			}
+			else if (val1 == PADDY || val2 == PADDY) {
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_paddy();
+			}
+			else if (val1 == TOMATO || val2 == TOMATO) {
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_tomato();
+			}
+			else if (val1 == PUMPKIN || val2 == PUMPKIN) {
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_pumpkin();
+			}
+			else if (val1 == WOOD || val2 == WOOD) {
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_wood();
+			}
+			if (val1 == 2 || val1 == 5 || val1 == 6 || val1 == 9 || val1 == 10 || val1 == 13 || val1 == 14 || val1 == 17 || val1 == 18 || val1 == 34 || val1 == 36 || val1 == 37 || val1 == 40 || val1 == 41 || val1 == 42 || val1 == 43 || val1 == 44 || val1 == 45
+				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67
+
+				|| val2 == 2 || val2 == 5 || val2 == 6 || val2 == 9 || val2 == 10 || val2 == 13 || val2 == 14 || val2 == 17 || val2 == 18 || val2 == 34 || val2 == 36 || val2 == 37 || val2 == 40 || val2 == 41 || val2 == 42 || val2 == 43 || val2 == 44 || val2 == 45
+				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67)
+			{
+				x_pos -= 2 * x_val;
+				
+			}
+			
 		}
 		else if (x_val < 0)
 		{
-			if (   map_data.tile[y1][x1] == 1
-				|| map_data.tile[y1][x1] == 24
-				|| map_data.tile[y1][x1] == 25
-				|| map_data.tile[y1][x1] == 3
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y2][x1];
+			if (val1 == APPLE || val2 == APPLE) {
+				map_data.tile[y1][x1] = EMPTY_APPLE;
+				map_data.tile[y2][x1] = EMPTY_APPLE;
+				increase_apple();
+			}
+			else if (val1 == EGG || val2 == EGG) {
+				map_data.tile[y1][x1] = EMPTY_EGG;
+				map_data.tile[y2][x1] = EMPTY_EGG;
+				increase_egg();
+			}
+			else if (val1 == CARROT || val2 == CARROT) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_carrot();
+			}
+			else if (val1 == PADDY || val2 == PADDY) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_paddy();
+			}
+			else if (val1 == TOMATO || val2 == TOMATO) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_tomato();
+			}
+			else if (val1 == PUMPKIN || val2 == PUMPKIN) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_pumpkin();
+			}
+			else if (val1 == WOOD || val2 == WOOD) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_wood();
+			}
+			if (val1 == 2 || val1 == 5 || val1 == 6 || val1 == 9 || val1 == 10 || val1 == 13 || val1 == 14 || val1 == 17 || val1 == 18 || val1 == 34 || val1 == 36 || val1 == 37 || val1 == 40 || val1 == 41 || val1 == 42 || val1 == 43 || val1 == 44 || val1 == 45
+				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67
 
-				|| map_data.tile[y2][x1] == 1
-				|| map_data.tile[y2][x1] == 24
-				|| map_data.tile[y2][x1] == 25
-				|| map_data.tile[y2][x1] == 3
-				)
+				|| val2 == 2 || val2 == 5 || val2 == 6 || val2 == 9 || val2 == 10 || val2 == 13 || val2 == 14 || val2 == 17 || val2 == 18 || val2 == 34 || val2 == 36 || val2 == 37 || val2 == 40 || val2 == 41 || val2 == 42 || val2 == 43 || val2 == 44 || val2 == 45
+				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67)
 			{
-				x_pos -= x_val;
+
+				x_pos -= 2 * x_val;
+			
+				
 			}
 		}
 	}
@@ -266,35 +314,100 @@ void Player::collision(MAP& map_data)
 	{
 		if (y_val > 0)
 		{
-			if (
-				   map_data.tile[y2][x1] == 1
-				|| map_data.tile[y2][x1] == 24
-				|| map_data.tile[y2][x1] == 25
-				|| map_data.tile[y2][x1] == 3
+			int val1 = map_data.tile[y2][x1];
+			int val2 = map_data.tile[y2][x2];
+			if (val1 == APPLE || val2 == APPLE) {
+				map_data.tile[y2][x1] = EMPTY_APPLE;
+				map_data.tile[y2][x2] = EMPTY_APPLE;
+				increase_apple();
+			}
+			else if (val1 == EGG || val2 == EGG) {
+				map_data.tile[y2][x1] = EMPTY_EGG;
+				map_data.tile[y2][x2] = EMPTY_EGG;
+				increase_egg();
+			}
+			else if (val1 == CARROT || val2 == CARROT) {
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_carrot();
+			}
+			else if (val1 == PADDY || val2 == PADDY) {
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_paddy();
+			}
+			else if (val1 == TOMATO || val2 == TOMATO) {
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_tomato();
+			}
+			else if (val1 == PUMPKIN || val2 == PUMPKIN) {
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_pumpkin();
+			}
+			else if (val1 == WOOD || val2 == WOOD) {
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
+				increase_wood();
+			}
+			if (val1 == 2 || val1 == 5 || val1 == 6 || val1 == 9 || val1 == 10 || val1 == 13 || val1 == 14 || val1 == 17 || val1 == 18 || val1 == 34 || val1 == 36 || val1 == 37 || val1 == 40 || val1 == 41 || val1 == 42 || val1 == 43 || val1 == 44 || val1 == 45
+				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67
 
-				|| map_data.tile[y2][x2] == 1
-				|| map_data.tile[y2][x2] == 24
-				|| map_data.tile[y2][x2] == 25
-				|| map_data.tile[y2][x2] == 3
-				)
+				|| val2 == 2 || val2 == 5 || val2 == 6 || val2 == 9 || val2 == 10 || val2 == 13 || val2 == 14 || val2 == 17 || val2 == 18 || val2 == 34 || val2 == 36 || val2 == 37 || val2 == 40 || val2 == 41 || val2 == 42 || val2 == 43 || val2 == 44 || val2 == 45
+				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67)
 			{
-				y_pos -= y_val;
+				y_pos -= 2 * y_val;
+			
 			}
 		}
 		else if (y_val < 0)
 		{
-			if (   map_data.tile[y1][x1] == 1
-				|| map_data.tile[y1][x1] == 24
-				|| map_data.tile[y1][x1] == 25
-				|| map_data.tile[y1][x1] == 3
+			int val1 = map_data.tile[y1][x1];
+			int val2 = map_data.tile[y2][x1];
+			if (val1 == APPLE || val2 == APPLE) {
+				map_data.tile[y1][x1] = EMPTY_APPLE;
+				map_data.tile[y2][x1] = EMPTY_APPLE;
+				increase_apple();
+			}
+			else if (val1 == EGG || val2 == EGG) {
+				map_data.tile[y1][x1] = EMPTY_EGG;
+				map_data.tile[y2][x1] = EMPTY_EGG;
+				increase_egg();
+			}
+			else if (val1 == CARROT || val2 == CARROT) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_carrot();
+			}
+			else if (val1 == PADDY || val2 == PADDY) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_paddy();
+			}
+			else if (val1 == TOMATO || val2 == TOMATO) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_tomato();
+			}
+			else if (val1 == PUMPKIN || val2 == PUMPKIN) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_pumpkin();
+			}
+			else if (val1 == WOOD || val2 == WOOD) {
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
+				increase_wood();
+			}
+			if (val1 == 2 || val1 == 5 || val1 == 6 || val1 == 9 || val1 == 10 || val1 == 13 || val1 == 14 || val1 == 17 || val1 == 18 || val1 == 34 || val1 == 36 || val1 == 37 || val1 == 40 || val1 == 41 || val1 == 42 || val1 == 43 || val1 == 44 || val1 == 45
+				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67
 
-				|| map_data.tile[y1][x2] == 1
-				|| map_data.tile[y1][x2] == 24
-				|| map_data.tile[y1][x2] == 25
-				|| map_data.tile[y1][x2] == 3
-			   )
+				|| val2 == 2 || val2 == 5 || val2 == 6 || val2 == 9 || val2 == 10 || val2 == 13 || val2 == 14 || val2 == 17 || val2 == 18 || val2 == 34 || val2 == 36 || val2 == 37 || val2 == 40 || val2 == 41 || val2 == 42 || val2 == 43 || val2 == 44 || val2 == 45
+				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67)
 			{
-				y_pos -= y_val;
+				y_pos -= 2 * y_val;
+				
 			}
 		}
 	}
@@ -303,10 +416,11 @@ void Player::collision(MAP& map_data)
 
 void Player::cycle_player() {
 	++frame;
-	if (frame / 8 > 8)frame = 0;
+	if (frame/8  > 8)frame = 0;
 	
 
 }
+
 
 
 
