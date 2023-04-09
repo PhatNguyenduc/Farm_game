@@ -49,20 +49,20 @@ void Player::set_clip()
 void Player::show(SDL_Renderer* grenderer) {
 	if (status == DOWN)
 	{
-		LoadImg("Image_game/down_.png", grenderer);
+		LoadImg("Image_game/DOWN.png", grenderer);
 		
 	}
 	else if (status == UP)
 	{
-		LoadImg("Image_game/up_.png", grenderer);
+		LoadImg("Image_game/UP.png", grenderer);
 	}
 	else if (status == RIGHT)
 	{
-		LoadImg("Image_game/right_.png", grenderer);
+		LoadImg("Image_game/RIGHT.png", grenderer);
 	}
 	else if (status == LEFT)
 	{
-		LoadImg("Image_game/left_.png", grenderer);
+		LoadImg("Image_game/LEFT.png", grenderer);
 	}
 	
 	
@@ -248,10 +248,12 @@ void Player::collision(MAP& map_data)
 				increase_wood();
 			}
 			if (val1 == 2 || val1 == 5 || val1 == 6 || val1 == 9 || val1 == 10 || val1 == 13 || val1 == 14 || val1 == 17 || val1 == 18 || val1 == 34 || val1 == 36 || val1 == 37 || val1 == 40 || val1 == 41 || val1 == 42 || val1 == 43 || val1 == 44 || val1 == 45
-				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67
+				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67 || val1 == 57
+				|| val1 == 58 || val1 == 59 || val1 == 60 || val1 == 61 || val1 == 62 || val1 == 63 || val1 == 64 || val1 == 65
 
 				|| val2 == 2 || val2 == 5 || val2 == 6 || val2 == 9 || val2 == 10 || val2 == 13 || val2 == 14 || val2 == 17 || val2 == 18 || val2 == 34 || val2 == 36 || val2 == 37 || val2 == 40 || val2 == 41 || val2 == 42 || val2 == 43 || val2 == 44 || val2 == 45
-				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67)
+				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67|| val1 == 57
+				|| val1 == 58 || val1 == 59 || val1 == 60 || val1 == 61 || val1 == 62 || val1 == 63 || val1 == 64 || val1 == 65)
 			{
 				x_pos -= 2 * x_val;
 				
@@ -298,10 +300,12 @@ void Player::collision(MAP& map_data)
 				increase_wood();
 			}
 			if (val1 == 2 || val1 == 5 || val1 == 6 || val1 == 9 || val1 == 10 || val1 == 13 || val1 == 14 || val1 == 17 || val1 == 18 || val1 == 34 || val1 == 36 || val1 == 37 || val1 == 40 || val1 == 41 || val1 == 42 || val1 == 43 || val1 == 44 || val1 == 45
-				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67
+				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67 || val1 == 57
+				|| val1 == 58 || val1 == 59 || val1 == 60 || val1 == 61 || val1 == 62 || val1 == 63 || val1 == 64 || val1 == 65
 
 				|| val2 == 2 || val2 == 5 || val2 == 6 || val2 == 9 || val2 == 10 || val2 == 13 || val2 == 14 || val2 == 17 || val2 == 18 || val2 == 34 || val2 == 36 || val2 == 37 || val2 == 40 || val2 == 41 || val2 == 42 || val2 == 43 || val2 == 44 || val2 == 45
-				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67)
+				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67 || val1 == 57
+				|| val1 == 58 || val1 == 59 || val1 == 60 || val1 == 61 || val1 == 62 || val1 == 63 || val1 == 64 || val1 == 65)
 			{
 
 				x_pos -= 2 * x_val;
@@ -352,13 +356,15 @@ void Player::collision(MAP& map_data)
 				increase_wood();
 			}
 			if (val1 == 2 || val1 == 5 || val1 == 6 || val1 == 9 || val1 == 10 || val1 == 13 || val1 == 14 || val1 == 17 || val1 == 18 || val1 == 34 || val1 == 36 || val1 == 37 || val1 == 40 || val1 == 41 || val1 == 42 || val1 == 43 || val1 == 44 || val1 == 45
-				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67
+				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67 || val1 == 57
+				|| val1 == 58 || val1 == 59 || val1 == 60 || val1 == 61 || val1 == 62 || val1 == 63 || val1 == 64 || val1 == 65
 
 				|| val2 == 2 || val2 == 5 || val2 == 6 || val2 == 9 || val2 == 10 || val2 == 13 || val2 == 14 || val2 == 17 || val2 == 18 || val2 == 34 || val2 == 36 || val2 == 37 || val2 == 40 || val2 == 41 || val2 == 42 || val2 == 43 || val2 == 44 || val2 == 45
-				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67)
+				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67 || val1 == 57
+				|| val1 == 58 || val1 == 59 || val1 == 60 || val1 == 61 || val1 == 62 || val1 == 63 || val1 == 64 || val1 == 65)
 			{
 				y_pos -= 2 * y_val;
-			
+
 			}
 		}
 		else if (y_val < 0)
@@ -401,10 +407,13 @@ void Player::collision(MAP& map_data)
 				increase_wood();
 			}
 			if (val1 == 2 || val1 == 5 || val1 == 6 || val1 == 9 || val1 == 10 || val1 == 13 || val1 == 14 || val1 == 17 || val1 == 18 || val1 == 34 || val1 == 36 || val1 == 37 || val1 == 40 || val1 == 41 || val1 == 42 || val1 == 43 || val1 == 44 || val1 == 45
-				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67
+				|| val1 == 46 || val1 == 47 || val1 == 48 || val1 == 49 || val1 == 50 || val1 == 51 || val1 == 67 || val1 == 57
+				|| val1 == 58 || val1 == 59 || val1 == 60 || val1==61||val1==62 ||val1==63||val1==64||val1==65
+		
 
 				|| val2 == 2 || val2 == 5 || val2 == 6 || val2 == 9 || val2 == 10 || val2 == 13 || val2 == 14 || val2 == 17 || val2 == 18 || val2 == 34 || val2 == 36 || val2 == 37 || val2 == 40 || val2 == 41 || val2 == 42 || val2 == 43 || val2 == 44 || val2 == 45
-				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67)
+				|| val2 == 46 || val2 == 47 || val2 == 48 || val2 == 49 || val2 == 50 || val2 == 51 || val2 == 67 || val1 == 57
+				|| val1 == 58 || val1 == 59 || val1 == 60 || val1 == 61 || val1 == 62 || val1 == 63 || val1 == 64 || val1 == 65)
 			{
 				y_pos -= 2 * y_val;
 				

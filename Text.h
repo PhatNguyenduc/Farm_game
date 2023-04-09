@@ -2,8 +2,9 @@
 #ifndef TEXT_H
 #define TEXT_H
 #include"commonFunction.h"
+#include"BaseObject.h"
 
-class text {
+class text :public BaseObject{
 public:
 	text();
 	~text();
@@ -26,6 +27,7 @@ public:
 	int GetHeight()const { return height; }
 	void SetText(string& text){str_val=text;}
 	string GetText()const { return str_val; }
+	
 private:
 	string str_val;
 	SDL_Color text_color;

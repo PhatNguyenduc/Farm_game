@@ -16,7 +16,7 @@ public:
 		rect.y = Y;
 
 	}
-	SDL_Rect GetRect() const {
+	SDL_Rect const GetRect()  {
 		return rect;
 	}
 	SDL_Texture* GetObject() const {

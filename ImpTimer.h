@@ -12,9 +12,10 @@ public:
 	void unpaused();
 
 	int get_ticks();
-	
+	bool start_game();
 	bool is_started_();
 	bool is_paused_();
+	bool count = false ;
 private:
 	int start_tick;
 	int pause_tick;

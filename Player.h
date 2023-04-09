@@ -6,15 +6,6 @@
 #include "BaseObject.h"
 
 const int SPEED = 3;
-const int APPLE = 52;
-const int PADDY = 53;
-const int CARROT = 54;
-const int TOMATO = 55;
-const int PUMPKIN = 56;
-const int EGG = 68;
-const int EMPTY_EGG = 69;
-const int EMPTY_APPLE = 80;
-const int WOOD = 47;
 
 
 

@@ -7,6 +7,7 @@
 #include <vector>
 #include"ImpTimer.h"
 #include "Text.h"
+#include"Menu.h"
 BaseObject End_game;
 Player player;
 TTF_Font* font_time = NULL;
@@ -18,9 +19,15 @@ BaseObject App;
 BaseObject Egg;
 BaseObject Woo;
 BaseObject lost;
+BaseObject Instruct;
+Menu menu;
+ImpTimer time_game_; 
 
+//Audio 
+Mix_Music* gMusic = NULL;
 
-
+//The sound effects that will be used
+Mix_Chunk* music_chunk = NULL;
 
 
 
@@ -62,6 +69,11 @@ bool init() {
 				printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
 				success = false;
 			}
+			if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0)
+			{
+				printf("SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError());
+				success = false;
+			}
 			
 			
 		}
@@ -87,6 +99,34 @@ void close()
 	SDL_Quit();
 	TTF_Quit();
 
+	Mix_FreeChunk(music_chunk);
+	music_chunk = NULL;
+
+	Mix_FreeMusic(gMusic);
+	gMusic = NULL;
+	Mix_Quit();
+
+
+}
+bool check = true;
+bool Check_Collision(const SDL_Rect& rect1, const SDL_Rect& rect2)
+{
+	int centerX1 = rect1.x + rect1.w / 16;
+	int centerY1 = rect1.y + rect1.h / 2;
+	int centerX2 = rect2.x + rect2.w / 16;
+	int centerY2 = rect2.y + rect2.h / 2;
+
+	// Tính khoảng cách giữa hai tâm
+	int distance = sqrt(pow(centerX1 - centerX2, 2) + pow(centerY1 - centerY2, 2));
+
+	// Tính tổng của nửa chiều dài của hai hình vuông
+	int sumHalfWidth = rect1.w / 16 + rect2.w / 16;
+	int sumHalfHeight = rect1.h / 2 + rect2.h / 2;
+	if (distance <= sumHalfWidth && distance <= sumHalfHeight) {
+		return true;
+	}
+
+	return false;
 }
 //animal
 vector<Animal*>animal()
@@ -162,16 +202,65 @@ vector<Animal*>chicken()
 	return list_animal;
 }
 
+vector<Animal*>Orc()
+{
+	vector<Animal*>list_animal;
+
+	Animal* dynamic_animal = new Animal[1];
+	
+	Animal* p_animal = dynamic_animal;
+	if (p_animal != NULL)
+	{
+		p_animal->LoadImg("Image_game/wolf2big.png",grenderer);
+		p_animal->set_x_pos(3200);
+		p_animal->set_y_pos(768);
+		p_animal->set_clip();
+
+		list_animal.push_back(p_animal);
+	}
+
+
+	return list_animal;
+}
+vector<Animal*>golem()
+{
+	vector<Animal*>list_animal;
+
+	Animal* dynamic_animal = new Animal[1];
+	for (int i = 0; i < 1; i++)
+	{
+
+
+		Animal* p_animal = dynamic_animal + i;
+		if (p_animal != NULL)
+		{
+			p_animal->LoadImg("Image_game/golem.png", grenderer);
+			p_animal->set_x_pos(900);
+			p_animal->set_y_pos(900);
+			p_animal->set_clip();
+			int left = p_animal->get_x_pos() - 100;
+			int right = p_animal->get_x_pos() + 100;
+			int up = p_animal->get_y_pos() - 100;
+			int down = p_animal->get_y_pos() + 100;
+			p_animal->Set_Area(left, right, up, down);
+			list_animal.push_back(p_animal);
+		}
+
+	}
+	return list_animal;
+}
 int main(int argc, char* argv[])
 {	
+	
 	//time
 	ImpTimer fps_timer;
 	if (init() == false)
 	{
 		return -1;
 	}
-	font_time = TTF_OpenFont("font/RobotoCondensed-Italic.ttf", 20);
 	
+	font_time = TTF_OpenFont("font/RobotoCondensed-Italic.ttf", 20);
+	gMusic = Mix_LoadMUS("Music/chillin39-20915.mp3");
 	//text
 	text time_game;
 	time_game.SetColor(text::WHITE);
@@ -190,7 +279,7 @@ int main(int argc, char* argv[])
 	
 	text egg_cnt;
 	egg_cnt.SetColor(text::BLACK);
-	
+
 	text apple_cnt;
 	apple_cnt.SetColor(text::BLACK);
 	
@@ -217,6 +306,25 @@ int main(int argc, char* argv[])
 	vector<Animal*>ANIMAL = animal();
 	vector<Animal*>DOG = dog();
 	vector<Animal*>CHICKEN = chicken();
+	vector<Animal*>ORC = Orc();
+	vector<Animal*>GOLEM = golem();
+
+	int menu_ = menu.show_menu(grenderer,font_time,time_game_ );
+	bool q = false;
+	while (!q) {
+
+
+		if (menu_ == 1) {
+			q = true;
+			time_game_.count = true;
+		}
+		else if (menu_ == 2) {
+			q = true;
+			is_quit = true;
+		}
+		
+	}
+	
 	while (!is_quit) 
 	{
 		fps_timer.start();
@@ -232,6 +340,11 @@ int main(int argc, char* argv[])
 			}
 			player.HandleInput(event, grenderer);
 			
+		}
+		if (Mix_PlayingMusic() == 0)
+		{
+			//Play the music
+			Mix_PlayMusic(gMusic, -1);
 		}
 		
 		MAP map_data = layer1.getMap();
@@ -290,41 +403,94 @@ int main(int argc, char* argv[])
 
 			}
 		}
-		for (int i = 0; i < CHICKEN.size(); i++)
+		
+	
+		//for (int i = 0; i < CHICKEN.size(); i++)
+		//{
+		//	Animal* p_animal = CHICKEN.at(i);
+		//	if (p_animal != NULL)
+		//	{
+		//		p_animal->set_MapXY(map_data.start_x, map_data.start_y);
+
+		//		p_animal->move_ani(map_data);
+
+		//		p_animal->Show(grenderer);
+
+		//	}
+		//}
+		
+		
+
+		for (int i = 0; i < ORC.size(); i++)
 		{
-			Animal* p_animal = CHICKEN.at(i);
+			Animal* p_animal = ORC.at(i);
 			if (p_animal != NULL)
 			{
 				p_animal->set_MapXY(map_data.start_x, map_data.start_y);
 
-				p_animal->move_ani(map_data);
+
+				p_animal->Catch(player.get_x_pos(), player.get_y_pos(), map_data);
+
+				p_animal->Show(grenderer);
+				if (Check_Collision(player.GetRect(),ORC.at(i)->GetRect())==true)
+				{
+					
+					check = false;
+				}
+				if (!check)
+				{
+
+					lost.Load_Img("Image_game/lose.png", grenderer);
+					lost.Set_Rect(WIDTH / 4, HEIGHT / 4);
+					lost.Render(grenderer, NULL);
+					lost.Free();
+					ORC.at(i)->stop_animal();
+					player.Stop();
+				}
+
+			}
+			
+		}
+		for (int i = 0; i < GOLEM.size(); i++)
+		{
+			Animal* p_animal = GOLEM.at(i);
+			if (p_animal != NULL)
+			{
+				p_animal->set_MapXY(map_data.start_x, map_data.start_y);
+
+				p_animal->random_move(map_data);
 
 				p_animal->Show(grenderer);
 
 			}
 		}
-		
-		
-		
 		//  show game_time
-		 string str_time = "TIME : ";
-		 Uint32 time_val = SDL_GetTicks() / 1000;
-		
-		 string val = to_string(time_val);
-		 if (time_val > 180) {
-			 lost.Load_Img("Image_game/lose.png", grenderer);
-			 lost.Set_Rect(WIDTH / 4, HEIGHT / 4);
-			 lost.Render(grenderer, NULL);
-			 lost.Free();
-			 player.Stop();
-		 }
-		 else {
-			 str_time += val;
-			 time_game.SetText(str_time);
-			 time_game.Load_from_file("font/RobotoCondensed-Italic.ttf");
-			 time_game.LoadFromRenderText(font_time, grenderer);
-			 time_game.RenderText(grenderer, WIDTH - 300, 20);
-		 }
+		if (time_game_.count == true) 
+		{
+			string str_time = "TIME : ";
+
+			int time_val = 200 - time_game_.get_ticks() / 1000;
+
+			string val = to_string(time_val);
+			if (time_val < 0) {
+				lost.Load_Img("Image_game/lose.png", grenderer);
+				lost.Set_Rect(WIDTH / 4, HEIGHT / 4);
+				lost.Render(grenderer, NULL);
+				lost.Free();
+				player.Stop();
+			}
+			else {
+				str_time += val;
+				time_game.SetText(str_time);
+				time_game.Load_from_file("font/RobotoCondensed-Italic.ttf");
+				time_game.LoadFromRenderText(font_time, grenderer);
+				time_game.RenderText(grenderer, WIDTH - 300, 20);
+			}
+			
+
+
+			
+		}
 		  //show agricultural
 		 
 		 string str_paddy = "paddy : " + to_string(player.paddy) +" / 10 ";
@@ -429,7 +595,19 @@ int main(int argc, char* argv[])
 				
 			 player.Stop();
 		 }
-		
+		/*if (!check)
+		 {
+
+			 lost.Load_Img("Image_game/lose.png", grenderer);
+			 lost.Set_Rect(WIDTH / 4, HEIGHT / 4);
+			 lost.Render(grenderer, NULL);
+			 lost.Free();
+			 
+			 player.Stop();
+		 }*/
+		 
+
+
 		 SDL_RenderPresent(grenderer);
 		
 		 int real_imp_time = fps_timer.get_ticks();

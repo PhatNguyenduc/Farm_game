@@ -26,14 +26,16 @@ public:
 	int get_height_frame() { return height_frame; }
 	void move_ani(MAP& map_data);
 	void ChecktoMap(MAP& map_data);
-	
+	void stop_animal();
 	void Set_Area(const int & pos_a,const int & pos_b,const int& pos_c,const int &pos_d)
 	{
 			Lim_Left = pos_a, Lim_Right = pos_b,
 			Lim_Up = pos_c, Lim_Down = pos_d;
 	}
 	void set_input_left(const int& ipLeft) { input_type.left = ipLeft; }
-	
+	void random_move(MAP& map_data);
+	void Catch(const int& x, const int& y, MAP& map_data);
+	void move_monster(MAP& map_data);
 private:
 	float x_pos;
 	float y_pos;

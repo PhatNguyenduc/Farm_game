@@ -58,6 +58,11 @@ int ImpTimer::get_ticks()
 	}
 	return 0;
 }
+bool ImpTimer::start_game()
+{
+	if (is_started == true)return true;
+	else return false;
+}
 bool ImpTimer::is_started_()
 {
 	return is_started;

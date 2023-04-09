@@ -11,7 +11,21 @@
 #include<SDL_ttf.h>
 #include <string>
 #include<cmath>
+#include<math.h>
 #include<Windows.h>
+#include<stdlib.h>
+#include<time.h>
+
+const int APPLE = 52;
+const int PADDY = 53;
+const int CARROT = 54;
+const int TOMATO = 55;
+const int PUMPKIN = 56;
+const int EGG = 68;
+const int EMPTY_EGG = 69;
+const int EMPTY_APPLE = 80;
+const int WOOD = 47;
+
 using namespace std;
 
 
@@ -24,6 +38,8 @@ static SDL_Event event;
 const float WIDTH = 1280;
 const float HEIGHT = 640;
 const int FPS = 60;
+
+
 
 const int COLOR_KEY_R = 167;
 const int COLOR_KEY_G = 175;
