@@ -174,8 +174,8 @@ void Player::Moving(MAP& map_data) {
 void Player::Stop()
 {
 	    //Move back
-		x_pos -= x_val;
-		y_pos -= y_val;
+		x_pos -= 2 * x_val;
+		y_pos -= 2 * y_val;
 }
 void Player::CenterMap_on_player(MAP& map_data) {
 	map_data.start_x = x_pos - (WIDTH / 2);

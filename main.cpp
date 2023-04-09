@@ -7,7 +7,7 @@
 #include <vector>
 #include"ImpTimer.h"
 #include "Text.h"
-
+BaseObject End_game;
 Player player;
 TTF_Font* font_time = NULL;
 
@@ -209,9 +209,14 @@ int main(int argc, char* argv[])
 	{
 		fps_timer.start();
 		while (SDL_PollEvent(&event) != 0) {
-			if (event.type == SDL_QUIT)
+			if (event.type == SDL_QUIT )
 			{
 				is_quit = true;
+			}
+			switch (event.key.keysym.sym)
+			{
+			case SDLK_ESCAPE: is_quit = true; 
+				break;
 			}
 			player.HandleInput(event, grenderer);
 			
@@ -358,15 +363,27 @@ int main(int argc, char* argv[])
 		 apple_cnt.Free();
 		 time_game.Free();
 		 
-		SDL_RenderPresent(grenderer);
-		int real_imp_time = fps_timer.get_ticks();
-		int time_one_frame = 1000 / FPS;
+
+		 if (player.apple >= 3 && player.paddy >= 10 && player.wood >= 2 && player.egg >= 2 && player.tomato >= 4 && player.pumpkin >= 5) {
+
+			 End_game.Load_Img("Image_game/END.png", grenderer);
+			 End_game.Render(grenderer, NULL);
+			 End_game.Free();
+				
+			 player.Stop();
+		 }
+		
+		 SDL_RenderPresent(grenderer);
+		
+		 int real_imp_time = fps_timer.get_ticks();
+		
+		 int time_one_frame = 1000 / FPS;
 
 		if (real_imp_time < time_one_frame)
 		{
 			SDL_Delay(time_one_frame - real_imp_time);
 		}
-
+		
 		
 	}
 	close();
