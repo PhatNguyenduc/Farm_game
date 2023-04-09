@@ -49,20 +49,20 @@ void Player::set_clip()
 void Player::show(SDL_Renderer* grenderer) {
 	if (status == DOWN)
 	{
-		LoadImg("Image_game/DOWN.png", grenderer);
+		LoadImg("Image_game/down_.png", grenderer);
 		
 	}
 	else if (status == UP)
 	{
-		LoadImg("Image_game/UP.png", grenderer);
+		LoadImg("Image_game/up_.png", grenderer);
 	}
 	else if (status == RIGHT)
 	{
-		LoadImg("Image_game/RIGHT.png", grenderer);
+		LoadImg("Image_game/right_.png", grenderer);
 	}
 	else if (status == LEFT)
 	{
-		LoadImg("Image_game/LEFT.png", grenderer);
+		LoadImg("Image_game/left_.png", grenderer);
 	}
 	
 	
@@ -213,13 +213,13 @@ void Player::collision(MAP& map_data)
 			    int val1 = map_data.tile[y1][x2];
 			    int val2 = map_data.tile[y2][x2];
 			if (val1 == APPLE || val2 == APPLE) {
-				map_data.tile[y1][x2] = EMPTY_APPLE;
-				map_data.tile[y2][x2] = EMPTY_APPLE;
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
 				increase_apple();
 			}
 			else if (val1 == EGG || val2 == EGG) {
-				map_data.tile[y1][x2] = EMPTY_EGG;
-				map_data.tile[y2][x2] = EMPTY_EGG;
+				map_data.tile[y1][x2] = 0;
+				map_data.tile[y2][x2] = 0;
 				increase_egg();
 			}
 			else if (val1 == CARROT || val2 == CARROT) {
@@ -263,13 +263,13 @@ void Player::collision(MAP& map_data)
 			int val1 = map_data.tile[y1][x1];
 			int val2 = map_data.tile[y2][x1];
 			if (val1 == APPLE || val2 == APPLE) {
-				map_data.tile[y1][x1] = EMPTY_APPLE;
-				map_data.tile[y2][x1] = EMPTY_APPLE;
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
 				increase_apple();
 			}
 			else if (val1 == EGG || val2 == EGG) {
-				map_data.tile[y1][x1] = EMPTY_EGG;
-				map_data.tile[y2][x1] = EMPTY_EGG;
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
 				increase_egg();
 			}
 			else if (val1 == CARROT || val2 == CARROT) {
@@ -317,13 +317,13 @@ void Player::collision(MAP& map_data)
 			int val1 = map_data.tile[y2][x1];
 			int val2 = map_data.tile[y2][x2];
 			if (val1 == APPLE || val2 == APPLE) {
-				map_data.tile[y2][x1] = EMPTY_APPLE;
-				map_data.tile[y2][x2] = EMPTY_APPLE;
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
 				increase_apple();
 			}
 			else if (val1 == EGG || val2 == EGG) {
-				map_data.tile[y2][x1] = EMPTY_EGG;
-				map_data.tile[y2][x2] = EMPTY_EGG;
+				map_data.tile[y2][x1] = 0;
+				map_data.tile[y2][x2] = 0;
 				increase_egg();
 			}
 			else if (val1 == CARROT || val2 == CARROT) {
@@ -366,13 +366,13 @@ void Player::collision(MAP& map_data)
 			int val1 = map_data.tile[y1][x1];
 			int val2 = map_data.tile[y2][x1];
 			if (val1 == APPLE || val2 == APPLE) {
-				map_data.tile[y1][x1] = EMPTY_APPLE;
-				map_data.tile[y2][x1] = EMPTY_APPLE;
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
 				increase_apple();
 			}
 			else if (val1 == EGG || val2 == EGG) {
-				map_data.tile[y1][x1] = EMPTY_EGG;
-				map_data.tile[y2][x1] = EMPTY_EGG;
+				map_data.tile[y1][x1] = 0;
+				map_data.tile[y2][x1] = 0;
 				increase_egg();
 			}
 			else if (val1 == CARROT || val2 == CARROT) {

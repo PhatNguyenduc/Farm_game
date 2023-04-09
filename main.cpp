@@ -10,6 +10,18 @@
 BaseObject End_game;
 Player player;
 TTF_Font* font_time = NULL;
+BaseObject Pad;
+BaseObject Tom;
+BaseObject Car;
+BaseObject Pum;
+BaseObject App;
+BaseObject Egg;
+BaseObject Woo;
+BaseObject lost;
+
+
+
+
 
 
 bool init() {
@@ -158,32 +170,32 @@ int main(int argc, char* argv[])
 	{
 		return -1;
 	}
-	font_time = TTF_OpenFont("font/lazy.ttf", 25);
+	font_time = TTF_OpenFont("font/RobotoCondensed-Italic.ttf", 20);
 	
 	//text
 	text time_game;
 	time_game.SetColor(text::WHITE);
 	
 	text paddy_cnt;
-	paddy_cnt.SetColor(text::RED);
+	paddy_cnt.SetColor(text::BLACK);
 	
 	text tomato_cnt;
-	tomato_cnt.SetColor(text::RED);
+	tomato_cnt.SetColor(text::BLACK);
 	
 	text carrot_cnt;
-	carrot_cnt.SetColor(text::RED);
+	carrot_cnt.SetColor(text::BLACK);
 	
 	text pumpkin_cnt;
-	pumpkin_cnt.SetColor(text::RED);
+	pumpkin_cnt.SetColor(text::BLACK);
 	
 	text egg_cnt;
-	egg_cnt.SetColor(text::RED);
+	egg_cnt.SetColor(text::BLACK);
 	
 	text apple_cnt;
-	apple_cnt.SetColor(text::RED);
+	apple_cnt.SetColor(text::BLACK);
 	
 	text wood_cnt;
-	wood_cnt.SetColor(text::RED);
+	wood_cnt.SetColor(text::BLACK);
 	
 
 
@@ -297,60 +309,70 @@ int main(int argc, char* argv[])
 		//  show game_time
 		 string str_time = "TIME : ";
 		 Uint32 time_val = SDL_GetTicks() / 1000;
+		
 		 string val = to_string(time_val);
-		 str_time += val;
-		 time_game.SetText(str_time);
-		 time_game.Load_from_file("font/lazy.ttf");
-		 time_game.LoadFromRenderText(font_time, grenderer);
-		 time_game.RenderText(grenderer,WIDTH - 300, 20);
+		 if (time_val > 180) {
+			 lost.Load_Img("Image_game/lose.png", grenderer);
+			 lost.Set_Rect(WIDTH / 4, HEIGHT / 4);
+			 lost.Render(grenderer, NULL);
+			 lost.Free();
+			 player.Stop();
+		 }
+		 else {
+			 str_time += val;
+			 time_game.SetText(str_time);
+			 time_game.Load_from_file("font/RobotoCondensed-Italic.ttf");
+			 time_game.LoadFromRenderText(font_time, grenderer);
+			 time_game.RenderText(grenderer, WIDTH - 300, 20);
+		 }
 		  //show agricultural
 		 
-		 string str_paddy = "paddy : " + to_string(player.paddy);
+		 string str_paddy = "paddy : " + to_string(player.paddy) +" / 10 ";
 		 
 		 paddy_cnt.SetText(str_paddy);
-		 paddy_cnt.Load_from_file("font/lazy.ttf");
+		 paddy_cnt.Load_from_file("font/RobotoCondensed-Italic.ttf");
 		 paddy_cnt.LoadFromRenderText(font_time, grenderer);
 		 paddy_cnt.RenderText(grenderer, 0, 0);
 
-		 string str_tomato = "tomato : " + to_string(player.tomato);
+		 string str_tomato = "tomato : " + to_string(player.tomato) + " / 4";
 
 		 tomato_cnt.SetText(str_tomato);
-		 tomato_cnt.Load_from_file("font/lazy.ttf");
+		 tomato_cnt.Load_from_file("font/RobotoCondensed-Italic.ttf");
 		 tomato_cnt.LoadFromRenderText(font_time, grenderer);
 		 tomato_cnt.RenderText(grenderer, 0, 64);
 
-		 string str_carrot = "carrot : " + to_string(player.carrot);
+		 string str_carrot = "carrot : " + to_string(player.carrot)+" / 5";
 
 		 carrot_cnt.SetText(str_carrot);
-		 carrot_cnt.Load_from_file("font/lazy.ttf");
+		 carrot_cnt.Load_from_file("font/RobotoCondensed-Italic.ttf");
 		 carrot_cnt.LoadFromRenderText(font_time, grenderer);
 		 carrot_cnt.RenderText(grenderer, 0, 128);
 		 
-		 string str_pumpkin = "pumpkin : " + to_string(player.pumpkin);
+		 string str_pumpkin = "pumpkin : " + to_string(player.pumpkin) + "/ 5";
 
 		 pumpkin_cnt.SetText(str_pumpkin);
-		 pumpkin_cnt.Load_from_file("font/lazy.ttf");
+		 pumpkin_cnt.Load_from_file("font/RobotoCondensed-Italic.ttf");
 		 pumpkin_cnt.LoadFromRenderText(font_time, grenderer);
 		 pumpkin_cnt.RenderText(grenderer, 256, 0);
 
-		 string str_apple = "apple : " + to_string(player.apple);
+		 string str_apple = "apple : " + to_string(player.apple) + " / 3";
 
 		 apple_cnt.SetText(str_apple);
-		 apple_cnt.Load_from_file("font/lazy.ttf");
+		 apple_cnt.Load_from_file("font/RobotoCondensed-Italic.ttf");
 		 apple_cnt.LoadFromRenderText(font_time, grenderer);
 		 apple_cnt.RenderText(grenderer, 256, 64);
 
-		 string str_egg = "egg : " + to_string(player.egg);
+		 string str_egg = "egg : " + to_string(player.egg) + " / 2";
 
 		 egg_cnt.SetText(str_egg);
-		 egg_cnt.Load_from_file("font/lazy.ttf");
+		 egg_cnt.Load_from_file("font/RobotoCondensed-Italic.ttf");
 		 egg_cnt.LoadFromRenderText(font_time, grenderer);
 		 egg_cnt.RenderText(grenderer, 256, 128);
 
-		 string str_wood = "wood : " + to_string(player.wood);
+		 string str_wood = "wood : " + to_string(player.wood)+" / 2";
 
 		 wood_cnt.SetText(str_wood);
-		 wood_cnt.Load_from_file("font/lazy.ttf");
+		 wood_cnt.Load_from_file("font/RobotoCondensed-Italic.ttf");
 		 wood_cnt.LoadFromRenderText(font_time, grenderer);
 		 wood_cnt.RenderText(grenderer, 512, 0);
 		 
@@ -362,11 +384,46 @@ int main(int argc, char* argv[])
 		 wood_cnt.Free();
 		 apple_cnt.Free();
 		 time_game.Free();
-		 
 
-		 if (player.apple >= 3 && player.paddy >= 10 && player.wood >= 2 && player.egg >= 2 && player.tomato >= 4 && player.pumpkin >= 5) {
+		 Pad.Load_Img("Image_game/pad.png", grenderer);
+		 Pad.Set_Rect(100,0);
+		 Pad.Render(grenderer, NULL);
+		 Pad.Free();
+
+		 Tom.Load_Img("Image_game/tom.png", grenderer);
+		 Tom.Set_Rect(100, 64);
+		 Tom.Render(grenderer, NULL);
+		 Tom.Free();
+
+		 Car.Load_Img("Image_game/car.png", grenderer);
+		 Car.Set_Rect(100,128);
+		 Car.Render(grenderer, NULL);
+		 Car.Free();
+
+		 Pum.Load_Img("Image_game/pum.png", grenderer);
+		 Pum.Set_Rect(256+100+20,0);
+		 Pum.Render(grenderer, NULL);
+		 Pum.Free();
+
+		 App.Load_Img("Image_game/app.png", grenderer);
+		 App.Set_Rect(256+100,64);
+		 App.Render(grenderer, NULL);
+		 App.Free();
+
+		 Egg.Load_Img("Image_game/egg.png", grenderer);
+		 Egg.Set_Rect(256+100,128);
+		 Egg.Render(grenderer,NULL);
+		 Egg.Free();
+		 
+		 Woo.Load_Img("Image_game/woo.png", grenderer);
+		 Woo.Set_Rect(512 + 100, 0);
+		 Woo.Render(grenderer, NULL);
+		 Woo.Free();
+
+		 if (player.apple >= 3 && player.paddy >= 10 && player.wood >= 2 && player.egg >= 2 && player.tomato >= 4 && player.pumpkin >= 5 && player.carrot>=5) {
 
 			 End_game.Load_Img("Image_game/END.png", grenderer);
+			 End_game.Set_Rect(WIDTH / 4, HEIGHT / 4);
 			 End_game.Render(grenderer, NULL);
 			 End_game.Free();
 				
