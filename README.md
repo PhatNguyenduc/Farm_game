@@ -12,7 +12,7 @@ game Funny_Farm được viết bằng ngôn ngữ C++ và sử dụng thư vi�
 -> `W` `A` `S` `D` để di chuyển 
 
 
--> thu thập các vật phẩm chỉ định trong thời gian để dành chiến thằng
+-> thu thập các vật phẩm chỉ định trong thời gian để dành chiến thằng (< 300s)
 (Menu, pause và cửa hàng tạm chưa có ... sẽ update trong thời gian tới)
 ![image](https://user-images.githubusercontent.com/115773745/230782206-9455f4d9-7649-41ba-9ec5-cc0e195e2949.png)
 
