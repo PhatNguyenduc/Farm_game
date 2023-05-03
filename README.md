@@ -13,8 +13,12 @@ game Funny_Farm được viết bằng ngôn ngữ C++ và sử dụng thư vi�
 
 
 -> thu thập các vật phẩm chỉ định trong thời gian để dành chiến thằng (< 100s) 
--> sói sẽ truy đuổi bạn , thu thập vật phẩm và trốn tránh nó , nó đã bị thương nên di chuyển rất chậm nhưng đừng để nó bắt được bạn...
+-> sói sẽ truy đuổi bạn , thu thập vật phẩm và trốn tránh nó , nó đã bị thương nên di chuyển rất chậm nhưng đừng để nó bắt được bạn...     
+
+
+`
 ![ezgif-2-c20561edae](https://user-images.githubusercontent.com/115773745/235965753-52582b5f-a3b1-46d9-979f-44d890e31914.gif)
+`
 
 
 
