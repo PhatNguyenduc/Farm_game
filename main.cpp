@@ -174,33 +174,7 @@ vector<Animal*>dog()
 
 	return list_animal;
 }
-vector<Animal*>chicken()
-{
-	vector<Animal*>list_animal;
 
-	Animal* dynamic_animal = new Animal[5];
-	for (int i = 0; i < 5; i++)
-	{
-
-
-		Animal* p_animal = dynamic_animal+i;
-		if (p_animal != NULL)
-		{
-			p_animal->LoadImg("Image_game/chicken8.png", grenderer);
-			p_animal->set_x_pos(300*i+100);
-			p_animal->set_y_pos(150*i*i+13*i+88);
-			p_animal->set_clip();
-			int left = p_animal->get_x_pos() - 60;
-			int right = p_animal->get_x_pos() + 60;
-			int up = p_animal->get_y_pos() - 60;
-			int down = p_animal->get_y_pos() + 60;
-			p_animal->Set_Area(left, right, up, down);
-			list_animal.push_back(p_animal);
-		}
-
-	}
-	return list_animal;
-}
 
 vector<Animal*>Orc()
 {
@@ -222,33 +196,7 @@ vector<Animal*>Orc()
 
 	return list_animal;
 }
-vector<Animal*>golem()
-{
-	vector<Animal*>list_animal;
 
-	Animal* dynamic_animal = new Animal[1];
-	for (int i = 0; i < 1; i++)
-	{
-
-
-		Animal* p_animal = dynamic_animal + i;
-		if (p_animal != NULL)
-		{
-			p_animal->LoadImg("Image_game/golem.png", grenderer);
-			p_animal->set_x_pos(900);
-			p_animal->set_y_pos(900);
-			p_animal->set_clip();
-			int left = p_animal->get_x_pos() - 100;
-			int right = p_animal->get_x_pos() + 100;
-			int up = p_animal->get_y_pos() - 100;
-			int down = p_animal->get_y_pos() + 100;
-			p_animal->Set_Area(left, right, up, down);
-			list_animal.push_back(p_animal);
-		}
-
-	}
-	return list_animal;
-}
 int main(int argc, char* argv[])
 {	
 	
@@ -305,9 +253,9 @@ int main(int argc, char* argv[])
 	//animal
 	vector<Animal*>ANIMAL = animal();
 	vector<Animal*>DOG = dog();
-	vector<Animal*>CHICKEN = chicken();
+
 	vector<Animal*>ORC = Orc();
-	vector<Animal*>GOLEM = golem();
+
 
 	int menu_ = menu.show_menu(grenderer,font_time,time_game_ );
 	bool q = false;
@@ -405,19 +353,6 @@ int main(int argc, char* argv[])
 		}
 		
 	
-		//for (int i = 0; i < CHICKEN.size(); i++)
-		//{
-		//	Animal* p_animal = CHICKEN.at(i);
-		//	if (p_animal != NULL)
-		//	{
-		//		p_animal->set_MapXY(map_data.start_x, map_data.start_y);
-
-		//		p_animal->move_ani(map_data);
-
-		//		p_animal->Show(grenderer);
-
-		//	}
-		//}
 		
 		
 
@@ -451,19 +386,7 @@ int main(int argc, char* argv[])
 			}
 			
 		}
-		for (int i = 0; i < GOLEM.size(); i++)
-		{
-			Animal* p_animal = GOLEM.at(i);
-			if (p_animal != NULL)
-			{
-				p_animal->set_MapXY(map_data.start_x, map_data.start_y);
-
-				p_animal->random_move(map_data);
-
-				p_animal->Show(grenderer);
-
-			}
-		}
+		
 		//  show game_time
 		if (time_game_.count == true) 
 		{
