@@ -29,7 +29,7 @@ Mix_Music* gMusic = NULL;
 //The sound effects that will be used
 Mix_Chunk* music_chunk = NULL;
 
-
+//bool playagain = false;
 
 bool init() {
 	bool success = true;
@@ -206,7 +206,7 @@ int main(int argc, char* argv[])
 	{
 		return -1;
 	}
-	
+label:
 	font_time = TTF_OpenFont("font/RobotoCondensed-Italic.ttf", 20);
 	gMusic = Mix_LoadMUS("Music/chillin39-20915.mp3");
 	//text
@@ -381,6 +381,7 @@ int main(int argc, char* argv[])
 					lost.Render(grenderer, NULL);
 					lost.Free();
 					ORC.at(i)->stop_animal();
+					time_game_.paused();
 					player.Stop();
 				}
 
@@ -393,7 +394,7 @@ int main(int argc, char* argv[])
 		{
 			string str_time = "TIME : ";
 
-			int time_val = 200 - time_game_.get_ticks() / 1000;
+			int time_val = 5 - time_game_.get_ticks() / 1000;
 
 			string val = to_string(time_val);
 			if (time_val < 0) {
@@ -401,6 +402,8 @@ int main(int argc, char* argv[])
 				lost.Set_Rect(WIDTH / 4, HEIGHT / 4);
 				lost.Render(grenderer, NULL);
 				lost.Free();
+				time_game_.paused();
+				ORC.at(0)->stop_animal();
 				player.Stop();
 			}
 			else {
@@ -516,11 +519,17 @@ int main(int argc, char* argv[])
 			 End_game.Set_Rect(WIDTH / 4, HEIGHT / 4);
 			 End_game.Render(grenderer, NULL);
 			 End_game.Free();
-				
+			 ORC.at(0)->stop_animal();
+			 time_game_.paused();
 			 player.Stop();
 		 }
 	
-		 
+		/* if (playagain == true)
+		 {
+			 player.set_pos(448,576);
+			 time_game;
+			 time_game_.start();
+		 }*/
 
 
 		 SDL_RenderPresent(grenderer);

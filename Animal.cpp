@@ -521,6 +521,6 @@ void Animal::move_monster(MAP& map_data)
 }
 void Animal::stop_animal()
 {
-	x_pos -= x_val;
-	y_pos -= y_val;
+	x_pos -= 2 * x_val;
+	y_pos -= 2 * y_val;
 }
