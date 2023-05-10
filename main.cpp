@@ -259,7 +259,8 @@ int main(int argc, char* argv[])
 
 	int menu_ = menu.show_menu(grenderer,font_time,time_game_ );
 	bool q = false;
-	while (!q) {
+	while (!q) 
+	{
 
 
 		if (menu_ == 1) {
@@ -511,23 +512,14 @@ int main(int argc, char* argv[])
 
 		 if (player.apple >= 3 && player.paddy >= 10 && player.wood >= 2 && player.egg >= 2 && player.tomato >= 4 && player.pumpkin >= 5 && player.carrot>=5) {
 
-			 End_game.Load_Img("Image_game/END.png", grenderer);
+			 End_game.Load_Img("Image_game/You_win.png", grenderer);
 			 End_game.Set_Rect(WIDTH / 4, HEIGHT / 4);
 			 End_game.Render(grenderer, NULL);
 			 End_game.Free();
 				
 			 player.Stop();
 		 }
-		/*if (!check)
-		 {
-
-			 lost.Load_Img("Image_game/lose.png", grenderer);
-			 lost.Set_Rect(WIDTH / 4, HEIGHT / 4);
-			 lost.Render(grenderer, NULL);
-			 lost.Free();
-			 
-			 player.Stop();
-		 }*/
+	
 		 
 
 

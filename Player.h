@@ -29,7 +29,11 @@ public:
 	void cycle_player();
 	float get_x_pos() { return x_pos; };
 	float get_y_pos() { return y_pos; };
-
+	void set_pos(const int x,const int y)
+	{
+		x_pos = x;
+		y_pos = y;
+	};
 	
 	void SetMapXY(const int MAP_X, const int MAP_Y) { map_x = MAP_X,map_y = MAP_Y; };
 	void Stop();

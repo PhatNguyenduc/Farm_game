@@ -451,7 +451,7 @@ void Animal::random_move(MAP& map_data)
 void Animal::Catch(const int& x, const int& y, MAP & map_data)
 {
 
-	if (x_pos > x  - 32  )
+	if (x_pos >= x  - 32  )
 	{
 		input_type.left = 1;
 		input_type.right = 0;
@@ -460,7 +460,7 @@ void Animal::Catch(const int& x, const int& y, MAP & map_data)
 		move_monster(map_data);
 
 	}
-	else if (x_pos < x +32)
+	else if (x_pos <= x - 32 )
 	{
 		input_type.left = 0;
 		input_type.right = 1;
@@ -474,14 +474,14 @@ void Animal::Catch(const int& x, const int& y, MAP & map_data)
 		input_type.right = 0;
 	}
 
-	if (y_pos < y - 32)
+	if (y_pos <= y - 32 )
 	{
 		input_type.up = 0;
 		input_type.down = 1;
 
 		move_monster(map_data);
 	}
-	else if (y_pos > y + 32)
+	else if (y_pos >= y - 32 )
 	{
 		input_type.up = 1;
 		input_type.down = 0;

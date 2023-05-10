@@ -4,7 +4,6 @@
 
 #include"commonFunction.h"
 #include"Text.h"
-#pragma once
 #include"BaseObject.h"
 #include"Text.h"
 #include"commonFunction.h"
